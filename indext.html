@@ -38,10 +38,13 @@
             background-color: rgb(214, 132, 180);
             color: aliceblue
         }
+
+        #records {}
     </style>
 </head>
 
 <body>
+    <img height="150px" src="/imgage/post lottne.jpg" alt="">
     <h1>
         猜數字挑戰賽!
     </h1>
@@ -55,9 +58,29 @@
 
     </div>
     <button id="restart">重新開始</button>
-    <h3 id="quest-count">猜錯5次</h3>
+    <h3 id="quest-count"></h3>
+
+    <p id="records">遊戲紀錄:</p>
+
     <script>
+        function showRecords() {
+            recordsE1.innerHTML += "";
+            for (let i = 0; i < records.lenght; i++) {
+                recordsE1.innerHTML += `<hr>
+                <div>
+                    時間:${records[i][0]}<br>
+                    遊戲結果:${records[i][0]}<br>
+                    次數:${records[i][2]}次
+                </div>
+                </hr>
+                ;
+            }
+        }
         function answer() {
+            if (count == maxCount) {
+                result.innerHTML = "請重新開始遊戲";
+                return;
+            }
             // alert(numberE1.value); //顯示輸入數字
             let number = numberE1.value;
             // 數字不能是空值
@@ -79,12 +102,14 @@
             // 判斷是否猜對
             if (number == computer) {
                 result.innerHTML += "猜對";
+                restart.disabled = false
+                records.push([new Date().toLocaleDateString(), '猜對了', count]);
 
                 // aler('猜對');
             } else {
-                questCount.innerHTML = `遊戲結束<br>答案為:${computer}`;
+                result.innerHTML = `遊戲結束 < br > 答案為:${ computer }`;
 
-                else if (numberE1 > computer) {
+                if (numberE1 > computer) {
                     result.innerHTML += "猜低一點";
                 }
                 else {
@@ -96,13 +121,56 @@
 
         }
         // const 不可變
-        const numberE1 = document.querySelector('#number');
-        const answerBtnE1 = document.querySelector("#answer");
-        const result = document.querySelector("#result");
-        const questCount = document.querySelector("#quest-count");
-        let count = 0;
-        let computer = 50;
-        console.log(numberE1, answerBtnE1, resultE1, questCount)
+        function answer() {
+            const numberE1 = document.querySelector('#number');
+            const answerBtnE1 = document.querySelector("#answer");
+            const result = document.querySelector("#result");
+            const questCount = document.querySelector("#quest-count");
+
+            addEventListener('click', () => {
+                count = 0;
+                result.innerHTML = '';
+                questCount.innerHTML = '';
+                numberE1.value = "";
+            }
+            );
+            let count = 0;
+            let computer = getRandomInt(1, 50);
+            console.log(numberE1, answerBtnE1, resultE1, questCount)
+        }
+
+        //  
+        // 
+        // 
+        let records = []; //Array()
+
+        console.log(new Date().toLocaleDateString());
+        // records.push(['2024/08/10 16:00:00','答錯','3次']);
+        // records.push(['2024/08/10 16:00:00','答錯','3次']);
+        // records.push(['2024/08/10 16:00:00','答錯','3次']);
+        // records.push(['2024/08/10 16:00:00','答錯','3次']);
+
+
+
+        // console.log(records);
+        // console.log(records.length);
+        // for (let i=0; i<records.lenght;i++){
+        //     console.log(records[i][0]);
+        // }
+        let x = 6.8;
+        console.log(x, Math.floor(x), Mathe.ceil(x));
+        // 0~9 =>1~10
+        console.log(Math.floor(Math.random() * 10) + 1);
+
+        console.log('--------------------------------------------------------')
+        for (let i = 0; i < 10; i++) {
+            consol.log(getRandomInt(0, 3))
+        }
+        function getRandomInt(start, end) {
+            return Math.floor(Math.random() * (end - start + 1)) + start;
+
+        }
+
     </script>
 </body>
 
