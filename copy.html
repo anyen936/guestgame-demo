@@ -12,27 +12,47 @@
     <label for="number">請猜一個數字</label>
     <input type="number" id="number">
     <button id="answer" onclick="answer()">送出</button>
+    <div id="result">結果 </div>
     <script>
         function answer() {
             let number = numberE1.value;
             // alert(numberE1.value);
-            // 數 入數字
+            // 輸入數字
+            // 設計輸入不能為空
+            if (number == '') {
+                // alert('不可輸入空白內容');
+                resultE1.innerHTML = "不可輸入空白內容";
+                return
+            }
+
+            // 輸入要在1~50之間
+            if (number < 1 || number > 50) {
+                // alert('輸入要在1~50之間');
+                resultE1.innerHTML = "輸入在1~50之間";
+                return
+            }
+
             if (number == computer) {
+                resultE1.innerHTML = "猜對了!";
                 alert("猜對了!");
             } else {
                 if (number > computer) {
-                    alert('猜低一點');
+                    resultE1.innerHTML = "猜低一點";
+                    // alert('猜低一點');
                 }
                 else {
-                    alert('猜高一點');
+                    resultE1.innerHTML = "猜高一點";
+                    // alert('猜高一點');
                 }
             }
         }
+
         const numberE1 = document.querySelector('#number');
         const answerE1 = document.querySelector('#answer');
+        const resultE1 = document.querySelector('#result');
 
         let computer = 50; //電腦設定答案
-        console.log(numberE1, answerE1);
+        console.log(numberE1, answerE1, resultE1);
 
 
     </script>
